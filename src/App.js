@@ -1,10 +1,12 @@
 import React from 'react';
-import Index from './components/List';
+import List from './components/List';
+import AddListButton from "./components/AddList";
 
 function App() {
-  return (<div className= "todo">
-    <div className="todo__sidebar">
-      <Index items = {[
+  return (
+      <div className= "todo">
+        <div className="todo__sidebar">
+         <List items = {[
           {
             icon:  <svg
                 width="18"
@@ -20,10 +22,9 @@ function App() {
             name: 'All tasks',
             active: true
           }
-
-      ]}/>
-
-      <Index items = {[
+      ]}
+      />
+      <List items = {[
           {
             color: 'green',
             name: "Покупки"
@@ -32,19 +33,24 @@ function App() {
             color: 'blue',
             name: "Frontend"
           },
-      {
+          {
             color: 'pink',
             name: "Films and sessions"
           }
-      ]}/>
+      ]}
+      />
+      <AddListButton/>
 
     </div>
-    <div className="todo__tasks"></div> 
+
+    <div className="todo__tasks">
+
+    </div>
   </div>
-  
+
   );
-    
-    
+
+
 }
 
 export default App;
