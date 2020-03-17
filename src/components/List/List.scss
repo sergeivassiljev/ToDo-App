@@ -1,8 +1,9 @@
 .list{
+
+  $self: &;
   margin-bottom: 30px;
   &__add-button{
     opacity: .4;
-    transition: opacity .1s linear;
 
     &:hover{
       opacity: 1;
@@ -10,16 +11,39 @@
   }
 
   li{
-
     display: flex;
     align-items: center;
     padding: 10px 12px;
     cursor: pointer;
 
+    &:hover #{$self}__remove-icon {
+      opacity: 0.2;
+    }
+
+    span{
+      flex: 1;
+    }
+/*             Razberisj, s krestikom                        */
+    &:hover{
+      background: rgba(255,255,255,0.6);
+    }
+
+    #{$self}__remove-icon{
+      opacity: 0;
+      &:hover{
+        opacity: 0.8;
+      }
+    }
+
     &.active{
       background: #FFFFFF;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
       border-radius: 4px;
+    }
+
+    .badge{
+      position: relative;
+      left: 5px;
     }
 
     i{
@@ -29,19 +53,6 @@
         opacity: .6;
       }
     }
-    .badge{
-      width: 10px;
-      height: 10px;
-      border-radius: 30px;
-      &--green{
-        background-color: #42b883;
-      }
-      &--blue{
-        background-color: #64c4ed;
-      }
-      &--pink{
-        background-color: pink;
-      }
-    }
+
   }
 }
