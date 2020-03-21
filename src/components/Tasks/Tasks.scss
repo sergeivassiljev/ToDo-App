@@ -1,4 +1,7 @@
 .tasks{
+  &:not(:last-of-type){
+    margin-bottom: 40px;
+  }
   &__title{
     font-family: Montserrat;
     font-weight: bold;
@@ -24,8 +27,49 @@
       }
     }
   }
+  &__form{
+    margin-top: 20px;
+
+    &-block{
+      .button{
+        margin-right: 10px;
+        margin-top: 15px;
+      }
+    }
+
+    &-new{
+      transition: .15s ease-in-out;
+      display: flex;
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.4;
+      &:hover{
+        opacity: 0.8;
+      }
+
+      img{
+        width: 16px;
+        height: 16px;
+        margin-left: 4px;
+      }
+
+      span{
+        font-size: 14px;
+        margin-left: 19px;
+      }
+    }
+  }
+
   &__items{
     margin-top: 30px;
+    h2{
+      font-style: normal;
+      font-weight: bold;
+      font-size: 22px;
+      color: #C9D1D3;
+      text-align: center;
+
+    }
     &-row{
       display: flex;
       align-self: center;

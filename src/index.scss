@@ -13,8 +13,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 750px;
-  height: 530px;
+  width: calc(100vw - 40px);
+  height: calc(100vh - 100px);
   transform: translate(-50%, -50%);
   box-shadow: 1px 2px 20px #f3f3f3;
   border-radius: 10px;
@@ -31,6 +31,8 @@
   &__tasks{
     flex: 1;
     padding: 60px;
+    overflow: auto; 
+
   }
 }
 
@@ -44,12 +46,28 @@
   border: 0;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 14px;
+
 
   &:hover{
     background: darken(#4DD599, 7%);
   }
   &:active{
     background: darken(#4DD599, 10%);
+  }
+  &:disabled{
+    background: #d8d8d8;
+  }
+
+  &--grey{
+    background: #f4f6f8;
+    color: #444444;
+    &:hover{
+      background: darken(#f4f6f8, 3%);
+    }
+    &:active{
+      background: darken(#f4f6f8, 6%);
+    }
   }
 
 }
@@ -62,6 +80,7 @@
   border-radius: 4px;
   padding: 8px 12px;
   width: 100%;
+  font-size: 12px;
   &:focus{
     border-color: #dbdbdb;
   }

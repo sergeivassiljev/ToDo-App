@@ -17,7 +17,7 @@ const List = ({
                   activeItem
               }) => {
     const removeList = item => {
-        if (window.confirm('Вы действительно хотите удалить список?')) {
+        if (window.confirm('Are you sure you want to delete the list?')) {
             axios.delete('http://localhost:3001/lists/' + item.id).then(() => {
                 onRemove(item.id);
             });
