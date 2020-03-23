@@ -19,6 +19,16 @@
       "id": 4,
       "name": "Книги",
       "colorId": 2
+    },
+    {
+      "name": "фильмы ",
+      "colorId": 3,
+      "id": 5
+    },
+    {
+      "name": "asd",
+      "colorId": 1,
+      "id": 6
     }
   ],
   "tasks": [
@@ -26,7 +36,7 @@
       "id": 1,
       "listId": 2,
       "text": "JS для лохов",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -38,7 +48,7 @@
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
@@ -49,20 +59,14 @@
     {
       "listId": 2,
       "text": "123",
-      "completed": true,
+      "completed": false,
       "id": 5
     },
     {
       "listId": 1,
       "text": "test",
-      "completed": false,
+      "completed": true,
       "id": 6
-    },
-    {
-      "listId": 1,
-      "text": "123",
-      "completed": false,
-      "id": 9
     },
     {
       "listId": 4,
@@ -73,20 +77,44 @@
     {
       "listId": 2,
       "text": "222",
-      "completed": true,
+      "completed": false,
       "id": 12
     },
     {
-      "listId": 1,
-      "text": "asdasd",
+      "listId": 2,
+      "text": "asdasdasd",
       "completed": false,
-      "id": 13
+      "id": 15
+    },
+    {
+      "listId": 1,
+      "text": "testes",
+      "completed": false,
+      "id": 17
+    },
+    {
+      "listId": 3,
+      "text": "asd",
+      "completed": true,
+      "id": 18
     },
     {
       "listId": 4,
-      "text": "",
+      "text": "asd",
       "completed": false,
-      "id": 14
+      "id": 19
+    },
+    {
+      "listId": 5,
+      "text": "гордость и предубеждение",
+      "completed": false,
+      "id": 20
+    },
+    {
+      "listId": 1,
+      "text": "asd",
+      "completed": false,
+      "id": 21
     }
   ],
   "colors": [

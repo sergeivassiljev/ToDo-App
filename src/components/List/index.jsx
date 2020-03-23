@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import axios from 'axios';
 
+
 import removeSvg from '../../assets/img/remove.svg';
 
 import Badge from '../Badge';
@@ -9,13 +10,13 @@ import Badge from '../Badge';
 import './List.scss';
 
 const List = ({
-                  items,
-                  isRemovable,
-                  onClick,
-                  onRemove,
-                  onClickItem,
-                  activeItem
-              }) => {
+    items,
+    isRemovable,
+    onClick,
+    onRemove,
+    onClickItem,
+    activeItem
+}) => {
     const removeList = item => {
         if (window.confirm('Are you sure you want to delete the list?')) {
             axios.delete('http://localhost:3001/lists/' + item.id).then(() => {
@@ -38,9 +39,9 @@ const List = ({
                 >
                     <i>{item.icon ? item.icon : <Badge color={item.color.name} />}</i>
                     <span>
-            {item.name}
+                        {item.name}
                         {item.tasks && ` (${item.tasks.length})`}
-          </span>
+                    </span>
                     {isRemovable && (
                         <img
                             className="list__remove-icon"

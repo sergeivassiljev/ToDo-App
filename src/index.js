@@ -8,5 +8,6 @@ import './index.scss' ;
 ReactDOM.render(
     <Router>
         <App />
+        .<small class="text-muted"></small>    
     </Router>
     , document.getElementById('root'));

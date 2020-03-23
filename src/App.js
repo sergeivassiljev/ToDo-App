@@ -26,27 +26,91 @@ function App() {
         const newList = [...lists, obj];
         setLists(newList);
     };
-    const onAddTask = (listId ,taskObj)=> {
-        const newList = lists.map(item =>{
-            if(item.id === listId) {
-                item.tasks= [...item.tasks, taskObj]
+
+    const onAddTask = (listId, taskObj) => {
+        const newList = lists.map(item => {
+            if (item.id === listId) {
+                item.tasks = [...item.tasks, taskObj]
             }
             return item;
         });
         setLists(newList);
     };
 
-    const onEditListTitle = (id, title) =>{
-        const newList = lists.map(item =>{
-            if(item.id === id) {
+    const onRemoveTask = (listId, taskId) => {
+        if (window.confirm('Are you sure you want to delete the task?')) {
+            const newList = lists.map(item => {
+                if (item.id === listId) {
+                    item.tasks = item.tasks.filter(task => task.id !== taskId)
+                }
+                return item;
+            });
+            setLists(newList);
+            axios.delete('http://localhost:3001/tasks/' + taskId).catch(() => {
+                alert('Task delete failed ');
+            });
+        }
+    };
+
+    const onEditTask = (listId, taskObj) => {
+        const newTaskText = window.prompt('Task text', taskObj.text)
+
+        if (!newTaskText) {
+            return;
+        }
+        const newList = lists.map(list => {
+            if (list.id === listId) {
+                list.tasks = list.tasks.map(task => {
+                    if (task.id === taskObj.id) {
+                        task.text = newTaskText;
+                    }
+                    return task;
+                });
+            }
+            return list;
+        });
+        setLists(newList);
+        axios
+            .patch('http://localhost:3001/tasks/' + taskObj.id, {
+                text: newTaskText
+            })
+            .catch(() => {
+                alert('Task edit failed');
+            });
+    };
+
+    const onEditListTitle = (id, title) => {
+        const newList = lists.map(item => {
+            if (item.id === id) {
                 item.name = title;
             }
             return item;
         });
         setLists(newList);
 
-
     };
+
+    const onCompleteTask = (listId, taskId, completed) => {
+        const newList = lists.map(list => {
+            if (list.id === listId) {
+                list.tasks = list.tasks.map(task => {
+                    if (task.id === taskId) {
+                        task.completed = completed;
+                    }
+                    return task;
+                });
+            }
+            return list;
+        });
+        setLists(newList);
+        axios
+            .patch('http://localhost:3001/tasks/' + taskId, {
+                completed
+            })
+            .catch(() => {
+                alert('Task edit failed');
+            });
+    }
 
     useEffect(() => {
         const listId = history.location.pathname.split('lists/')[1];
@@ -54,7 +118,7 @@ function App() {
             const list = lists.find(list => list.id === Number(listId));
             setActiveItem(list);
         }
-    }, [lists,history.location.pathname]);
+    }, [lists, history.location.pathname]);
 
     return (
         <div className="todo">
@@ -65,7 +129,7 @@ function App() {
                     }}
                     items={[
                         {
-                            active: true,
+                            active: history.location.pathname === '/',
                             icon: (
                                 <svg
                                     width="18"
@@ -87,19 +151,19 @@ function App() {
                 {lists ? (
                     <List
                         items={lists}
-                            onRemove={id => {
-                                const newLists = lists.filter(item => item.id !== id);
-                                setLists(newLists);
-                            }}
-                            onClickItem={list => {
-                                history.push(`/lists/${list.id}`);
-                            }}
-                            activeItem={activeItem}
-                            isRemovable
+                        onRemove={id => {
+                            const newLists = lists.filter(item => item.id !== id);
+                            setLists(newLists);
+                        }}
+                        onClickItem={list => {
+                            history.push(`/lists/${list.id}`);
+                        }}
+                        activeItem={activeItem}
+                        isRemovable
                     />
                 ) : (
-                    'Loading...'
-                )}
+                        'Loading...'
+                    )}
                 <AddList onAdd={onAddList} colors={colors} />
             </div>
             <div className="todo__tasks">
@@ -111,16 +175,22 @@ function App() {
                                 list={list}
                                 onAddTask={onAddTask}
                                 onEditTitle={onEditListTitle}
+                                onRemoveTask={onRemoveTask}
+                                onEditTask={onEditTask}
+                                onCompleteTask={onCompleteTask}
                                 withoutEmpty
-                        />
+                            />
                         )}
                 </Route>
                 <Route path="/lists/:id">
                     {lists && activeItem &&
-                    <Tasks list={activeItem}
-                           onAddTask={onAddTask}
-                           onEditTitle={onEditListTitle}
-                    />}
+                        <Tasks list={activeItem}
+                            onAddTask={onAddTask}
+                            onEditTitle={onEditListTitle}
+                            onRemoveTask={onRemoveTask}
+                            onEditTask={onEditTask}
+                            onCompleteTask={onCompleteTask}
+                        />}
                 </Route>
 
             </div>
